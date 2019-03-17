@@ -2,7 +2,6 @@ package io.github.anomal.quantumsafe.newhope.ex;
 
 import org.bouncycastle.crypto.AsymmetricCipherKeyPair;
 import org.bouncycastle.crypto.KeyGenerationParameters;
-import org.bouncycastle.crypto.params.AsymmetricKeyParameter;
 import org.bouncycastle.pqc.crypto.ExchangePair;
 import org.bouncycastle.pqc.crypto.newhope.NHAgreement;
 import org.bouncycastle.pqc.crypto.newhope.NHExchangePairGenerator;
