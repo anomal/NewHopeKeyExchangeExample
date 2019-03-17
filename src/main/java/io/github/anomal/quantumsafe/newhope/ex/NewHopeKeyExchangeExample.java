@@ -15,14 +15,15 @@ import java.util.Base64;
 public class NewHopeKeyExchangeExample {
 
     public static void main(String[] args) {
-        AsymmetricCipherKeyPair keyPairAlice = createKeyPair();
-        NHPublicKeyParameters publicKeyAlice = (NHPublicKeyParameters) keyPairAlice.getPublic();
-        String alicePubKey = Base64.getEncoder().encodeToString(publicKeyAlice.getPubData());
+        // Alice does this
+        NHKeyPairGenerator nhKeyPairGenerator = new NHKeyPairGenerator();
+        nhKeyPairGenerator.init(new KeyGenerationParameters(new SecureRandom(), 1024));
+        AsymmetricCipherKeyPair aliceKeyPair = nhKeyPairGenerator.generateKeyPair();
+        NHPublicKeyParameters alicePublicKey = (NHPublicKeyParameters) aliceKeyPair.getPublic();
+        String alicePubKey = Base64.getEncoder().encodeToString(alicePublicKey.getPubData());
         System.out.println("Alice sends 'alicePubKey' to Bob.");
         System.out.println("alicePubKey: " + alicePubKey);
         System.out.println();
-
-        AsymmetricCipherKeyPair keyPairBob = createKeyPair();
 
         // Bob does this
         NHPublicKeyParameters fromAlice = new NHPublicKeyParameters(Base64.getDecoder().decode(alicePubKey));
@@ -40,7 +41,7 @@ public class NewHopeKeyExchangeExample {
         // Alice does this
         NHPublicKeyParameters fromBob = new NHPublicKeyParameters(Base64.getDecoder().decode(forAlice));
         NHAgreement nhAgreement = new NHAgreement();
-        nhAgreement.init(keyPairAlice.getPrivate());
+        nhAgreement.init(aliceKeyPair.getPrivate());
         byte[] sharedValueAsPerAlice = nhAgreement.calculateAgreement(fromBob);
         String aliceSharedVal = Base64.getEncoder().encodeToString(sharedValueAsPerAlice);
         System.out.println("Alice calculates shared value: " + aliceSharedVal);
@@ -49,9 +50,4 @@ public class NewHopeKeyExchangeExample {
         System.out.println("aliceSharedVal equals bobSharedVal is: " +aliceSharedVal.equals(bobSharedVal));
     }
 
-    private static AsymmetricCipherKeyPair createKeyPair() {
-        NHKeyPairGenerator keyPairGenerator = new NHKeyPairGenerator();
-        keyPairGenerator.init(new KeyGenerationParameters(new SecureRandom(), 1024));
-        return keyPairGenerator.generateKeyPair();
-    }
 }
