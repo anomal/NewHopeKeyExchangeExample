@@ -46,7 +46,7 @@ public class NewHopeKeyExchangeExample {
         System.out.println("Alice calculates shared value: " + aliceSharedVal);
         System.out.println();
 
-        System.out.println("aliceSharedVal equals bobSharedVal is: " +aliceSharedVal.equals(bobSharedVal));
+        System.out.println("aliceSharedVal equals bobSharedVal is: " + aliceSharedVal.equals(bobSharedVal));
     }
 
 }
