@@ -1,4 +1,4 @@
-# NewHopeKeyExchangeExample
+# NewHope post-quantum algorithm key exchange example
 This is an example of post-quantum key exchange using the [NewHope](https://eprint.iacr.org/2015/1092.pdf) (warning: PDF link) algorithm implemented by the Java cryptography library [Bouncy Castle](https://www.bouncycastle.org/java.html).
 
 ## Output (example)
